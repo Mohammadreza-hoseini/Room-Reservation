@@ -14,7 +14,7 @@ class NewUser(AbstractUser):
     reservation_count = models.SmallIntegerField(default=0, verbose_name='user reservations count')
 
     def __str__(self):
-        return self.phone_number
+        return str(self.phone_number)
 
     class Meta:
         ordering = ('-date_joined',)

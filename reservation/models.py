@@ -32,8 +32,8 @@ class Reservation(models.Model):
     id = models.CharField(default=uuid.uuid4, editable=False, primary_key=True)
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='reservation_room_id',
                                 verbose_name='choose room')
-    user_id = models.ForeignKey(NewUser, on_delete=models.CASCADE, related_name='reservation_user_id',
-                                verbose_name='choose user')
+    user_id = models.ManyToManyField(NewUser, related_name='reservation_user_id',
+                                     verbose_name='choose user')
     status = models.BooleanField(default=False, verbose_name='reservation status')
     created_at = models.DateTimeField(auto_now_add=True)
 
