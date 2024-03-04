@@ -23,6 +23,7 @@ class Room(models.Model):
                                     verbose_name='choose day and time')
     status = models.BooleanField(default=False, verbose_name='status of room')
     created_at = models.DateTimeField(auto_now_add=True)
+    capacity = models.SmallIntegerField(default=0, verbose_name='room capacity')
 
     def __str__(self):
         return self.status
