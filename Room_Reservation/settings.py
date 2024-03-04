@@ -86,7 +86,7 @@ WSGI_APPLICATION = "Room_Reservation.wsgi.application"
 
 # connect to database with url
 DATABASES = {'default': dj_database_url.config(
-    default='postgresql://root:3RoyfSOT0bZlsmhIy5QomYid@cho-oyu.liara.cloud:30386/postgres')}
+    default='postgresql://root:cG8U9AofiHJARtzAHN0jBQiN@cho-oyu.liara.cloud:34070/postgres')}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -126,3 +126,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = 'accounts.NewUser'
