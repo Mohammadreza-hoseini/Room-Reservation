@@ -18,3 +18,4 @@ class NewUser(AbstractUser):
 
     class Meta:
         ordering = ('-date_joined',)
+
