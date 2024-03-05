@@ -11,6 +11,7 @@ class Calendar(models.Model):
     start_time = models.TimeField(verbose_name='start time', auto_now=False, auto_now_add=False)
     end_time = models.TimeField(verbose_name='end time', auto_now=False, auto_now_add=False)
     date = models.DateField(verbose_name='choose date')
+    is_active = models.BooleanField(default=True, verbose_name='this time active or no')
 
     def __str__(self):
         return f'{self.day}: {self.start_time} - {self.end_time}'
