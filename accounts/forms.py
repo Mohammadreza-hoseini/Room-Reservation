@@ -1,4 +1,5 @@
 import re
+import random
 from django import forms
 from .models import NewUser
 
@@ -38,3 +39,37 @@ class NewUserForm(forms.ModelForm):
                                       phone_number=data.get('phone_number'),
                                       username=data.get('phone_number'))
         user.save()
+
+
+class LoginForm(forms.ModelForm):
+    class Meta:
+        model = NewUser
+        fields = ('phone_number',)
+
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data['phone_number']
+        if phone_number is None or phone_number == '':
+            self.add_error('phone_number', 'Enter your phone number')
+            return False
+        pattern = '^(\+98|0)?9\d{9}$'
+        result = re.match(pattern, str(phone_number))
+        if not result:
+            self.add_error('phone_number', 'Phone number format is wrong')
+        check_phone_number = NewUser.objects.filter(phone_number=phone_number).first()
+        if not check_phone_number:
+            self.add_error('phone_number', 'SignUp please')
+        elif check_phone_number:
+            check_phone_number.otp = random.randint(10000, 99999)
+            print(check_phone_number.otp)
+            check_phone_number.save()
+
+
+class OtpForm(forms.ModelForm):
+    class Meta:
+        model = NewUser
+        fields = ('otp',)
+
+    def clean_otp(self):
+        otp = self.cleaned_data['otp']
+        if otp is None or otp == '':
+            self.add_error('otp', 'Enter otp code')

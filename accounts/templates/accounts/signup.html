@@ -1,6 +1,7 @@
 {% extends 'main.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+    <h1 class="mb-5">SignUp Form</h1>
     <form method="post" novalidate>
     {% csrf_token %}
     {{form|crispy}}
