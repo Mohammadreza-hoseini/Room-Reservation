@@ -36,7 +36,6 @@ class Reservation(models.Model):
                                 verbose_name='choose room')
     user_id = models.ManyToManyField(NewUser, related_name='reservation_user_id',
                                      verbose_name='choose user')
-    status = models.BooleanField(default=False, verbose_name='reservation status')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
