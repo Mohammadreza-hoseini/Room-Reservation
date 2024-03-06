@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1 class="mb-5">Check Otp</h1>
+    {% if message %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endif %}
+    <form method="post" novalidate>
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type="submit" class="btn btn-success">Send</button>
+    </form>
+{% endblock content %}

@@ -11,18 +11,8 @@
     <title>Room Reservation</title>
 </head>
 <body>
-{#<div class="container">#}
-{#    <div class="row justify-content-center">#}
-{#        <div class="col-8">#}
-{#            <h1 class="mt-2">Room Reservation</h1>#}
-{#            <hr class="mt-0 mb-4">#}
-{#            {% block content %}#}
-{#            {% endblock %}#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
 <nav class="navbar navbar-expand-lg navbar-light bg-light container">
-    <a class="navbar-brand" href="#">Room Reservation</a>
+    <a class="navbar-brand" href="{% url 'home' %}">Room Reservation</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -32,12 +22,17 @@
             <li class="nav-item active ml-5">
                 <a class="btn btn-primary" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item ml-5">
+            {% if user.is_authenticated %}
+                <li class="nav-item ml-5">
+                <a class="btn btn-warning" href="{% url 'logout' %}">LogOut</a>
+            {% else %}
+                <li class="nav-item ml-5">
                 <a class="btn btn-warning" href="{% url 'signup' %}">SignUp</a>
             </li>
             <li class="nav-item ml-5">
-                <a class="btn btn-warning" href="#">LogIn</a>
+                <a class="btn btn-warning" href="{% url 'login' %}">LogIn</a>
             </li>
+            {% endif %}
         </ul>
     </div>
 </nav>
