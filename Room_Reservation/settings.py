@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap4",
     "accounts",
     "reservation",
+    "home",
 ]
 
 MIDDLEWARE = [
