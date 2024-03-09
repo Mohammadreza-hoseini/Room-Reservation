@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, logout
 
+from django.views.generic.detail import DetailView
 # Create your views here.
 from accounts.forms import NewUserForm, LoginForm, OtpForm
 from accounts.models import NewUser
@@ -52,3 +53,9 @@ def check_otp(request):
 def user_logout(request):
     logout(request)
     return redirect('home')
+
+
+class UserProfile(DetailView):
+    model = NewUser
+    template_name = "accounts/userprofile.html"
+    context_object_name = "user"

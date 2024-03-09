@@ -12,7 +12,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light container">
-    <a class="navbar-brand" href="{% url 'home' %}">Room Reservation</a>
+    <a class="navbar-brand" href="{% url 'home:home' %}">Room Reservation</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,11 +20,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active ml-5">
-                <a class="btn btn-primary" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                <a class="btn btn-primary" href="{% url 'home:home' %}">Home <span class="sr-only">(current)</span></a>
             </li>
             {% if user.is_authenticated %}
                 <li class="nav-item ml-5">
                 <a class="btn btn-warning" href="{% url 'accounts:logout' %}">LogOut</a>
+                <a class="btn btn-warning" href="{% url 'accounts:user-profile' request.user.id %}">Profile</a>
+
             {% else %}
                 <li class="nav-item ml-5">
                 <a class="btn btn-warning" href="{% url 'accounts:signup' %}">SignUp</a>
