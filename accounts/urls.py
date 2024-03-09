@@ -9,5 +9,7 @@ urlpatterns = [
     path('otp/', views.check_otp, name="otp"),
     path('logout/', views.user_logout, name="logout"),
     path('userprofile/<uuid:pk>/', views.UserProfile.as_view(), name="user-profile"),
+    path('joingroup/', views.JoinGroup.as_view(), name="join-group"),
+
 
 ]

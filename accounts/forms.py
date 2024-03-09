@@ -1,7 +1,7 @@
 import re
 import random
 from django import forms
-from .models import NewUser
+from .models import NewUser,TeamMembers
 
 
 class NewUserForm(forms.ModelForm):
@@ -90,3 +90,8 @@ class OtpForm(forms.ModelForm):
         if otp is None or otp == '':
             self.add_error('otp', 'Enter otp code')
         return otp
+
+class JoinGroupForm(forms.ModelForm):
+    class Meta:
+        model = TeamMembers
+        fields = ("leader",)

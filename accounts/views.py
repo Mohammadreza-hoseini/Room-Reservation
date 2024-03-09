@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, logout
+from django.urls import reverse_lazy
 
-from django.views.generic.detail import DetailView
+from django.views.generic import DetailView , CreateView , View
 # Create your views here.
-from accounts.forms import NewUserForm, LoginForm, OtpForm
-from accounts.models import NewUser
+from accounts.forms import NewUserForm, LoginForm, OtpForm, JoinGroupForm
+from accounts.models import NewUser , TeamMembers , TeamLeader
 
 
 def signup(request):
@@ -59,3 +60,28 @@ class UserProfile(DetailView):
     model = NewUser
     template_name = "accounts/userprofile.html"
     context_object_name = "user"
+
+
+class JoinGroup(View):
+
+    form_class = JoinGroupForm
+    template_page = "accounts/joingroup.html"
+
+    def get(self,request):
+        
+        form = self.form_class
+        return render(request,self.template_page,{
+            "form":form
+        })
+    def post(self,request):
+        form = self.form_class(request.POST)
+        print("**********************************************",request.user.username)
+        if form.is_valid():
+            cd = form.cleaned_data
+            
+            TeamMembers.leader = cd["leader"]
+            TeamMembers.users = request.user
+            TeamMembers.save()
+            return redirect("accounts:user-profile")
+
+    
