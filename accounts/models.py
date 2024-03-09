@@ -25,18 +25,18 @@ class TeamLeader(models.Model):
                                   verbose_name='Leader')
 
     def __str__(self):
-        return self.leader.first_name
+        return self.leader.username
 
 
 class TeamMembers(models.Model):
     id = models.CharField(default=uuid.uuid4, editable=False, primary_key=True)
-    leader = models.OneToOneField(TeamLeader, on_delete=models.CASCADE, related_name='team_members_leader',
-                                  verbose_name='choose leader')
-    users = models.OneToOneField(NewUser, on_delete=models.CASCADE, related_name='team_members_users',
-                                 verbose_name='choose user')
+    leader = models.ForeignKey(TeamLeader, on_delete=models.CASCADE, related_name='team_members_leader',
+                               verbose_name='choose leader')
+    users = models.ManyToManyField(NewUser, related_name='team_members_users',
+                                   verbose_name='choose user')
 
     def __str__(self):
-        return self.leader.leader.first_name
+        return self.leader.leader.username
 
 
 from reservation.models import Room
