@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import NewUser
+from .models import NewUser, TeamLeader
 from django.contrib.auth.admin import UserAdmin
 
 
@@ -7,8 +7,7 @@ from django.contrib.auth.admin import UserAdmin
 
 class CustomUserAdmin(UserAdmin):
     list_display = (
-        'username', 'email', 'first_name', 'last_name', 'is_staff',
-        'phone_number', 'otp'
+        'username', 'email', 'first_name', 'last_name', 'is_staff'
     )
 
     fieldsets = (
@@ -28,7 +27,7 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('last_login', 'date_joined')
         }),
         ('Additional info', {
-            'fields': ('phone_number', 'otp', 'avatar')
+            'fields': ('phone_number', 'otp', 'avatar',)
         })
     )
 
@@ -49,9 +48,10 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('last_login', 'date_joined')
         }),
         ('Additional info', {
-            'fields': ('phone_number', 'otp', 'avatar')
+            'fields': ('phone_number', 'otp', 'avatar',)
         })
     )
 
 
 admin.site.register(NewUser, CustomUserAdmin)
+admin.site.register(TeamLeader)
