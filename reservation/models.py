@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import NewUser
+from accounts.models import NewUser, TeamLeader
 import uuid
 
 
@@ -46,8 +46,8 @@ class Reservation(models.Model):
     id = models.CharField(default=uuid.uuid4, editable=False, primary_key=True)
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='reservation_room_id',
                                 verbose_name='choose room')
-    user_id = models.ManyToManyField(NewUser, related_name='reservation_user_id',
-                                     verbose_name='choose user')
+    leader = models.ForeignKey(TeamLeader, on_delete=models.CASCADE, related_name='reservation_leader_id',
+                               verbose_name='choose leader')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
