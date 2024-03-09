@@ -23,7 +23,7 @@ class TeamLeader(models.Model):
     id = models.CharField(default=uuid.uuid4, editable=False, primary_key=True)
     leader = models.OneToOneField(NewUser, on_delete=models.CASCADE, related_name='team_leader_user',
                                   verbose_name='Leader')
-    users = models.ForeignKey(NewUser, on_delete=models.CASCADE, related_name='users_of_team')
+    users = models.ForeignKey(NewUser, on_delete=models.CASCADE, related_name='users_of_team', null=True, blank=True)
 
     def __str__(self):
         return self.leader.first_name
