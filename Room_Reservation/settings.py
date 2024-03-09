@@ -90,7 +90,7 @@ WSGI_APPLICATION = "Room_Reservation.wsgi.application"
 
 # connect to database with url
 DATABASES = {'default': dj_database_url.config(
-    default='postgresql://root:cG8U9AofiHJARtzAHN0jBQiN@cho-oyu.liara.cloud:34070/postgres')}
+    default='postgresql://root:73wWo0aOKGlbMDYazODtpOpR@cho-oyu.liara.cloud:34261/postgres')}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
