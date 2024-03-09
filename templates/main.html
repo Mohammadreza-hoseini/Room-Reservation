@@ -24,13 +24,13 @@
             </li>
             {% if user.is_authenticated %}
                 <li class="nav-item ml-5">
-                <a class="btn btn-warning" href="{% url 'logout' %}">LogOut</a>
+                <a class="btn btn-warning" href="{% url 'accounts:logout' %}">LogOut</a>
             {% else %}
                 <li class="nav-item ml-5">
-                <a class="btn btn-warning" href="{% url 'signup' %}">SignUp</a>
+                <a class="btn btn-warning" href="{% url 'accounts:signup' %}">SignUp</a>
             </li>
             <li class="nav-item ml-5">
-                <a class="btn btn-warning" href="{% url 'login' %}">LogIn</a>
+                <a class="btn btn-warning" href="{% url 'accounts:login' %}">LogIn</a>
             </li>
             {% endif %}
         </ul>

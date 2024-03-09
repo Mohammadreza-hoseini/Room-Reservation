@@ -5,9 +5,21 @@ import uuid
 
 # Create your models here.
 
+class ChooseDay(models.IntegerChoices):
+    saturday = 0, "saturday"
+    sunday = 1, "sunday"
+    monday = 2, "monday"
+    tuesday = 3, "tuesday"
+    wednesday = 4, "wednesday"
+    thursday = 5, "thursday"
+    friday = 6, "friday"
+
+
 class Calendar(models.Model):
     id = models.CharField(default=uuid.uuid4, editable=False, primary_key=True)
-    day = models.SmallIntegerField(verbose_name='choose day')  # choice field
+    day = models.PositiveSmallIntegerField(
+        default=ChooseDay.saturday, choices=ChooseDay.choices, verbose_name="select day"
+    )
     start_time = models.TimeField(verbose_name='start time', auto_now=False, auto_now_add=False)
     end_time = models.TimeField(verbose_name='end time', auto_now=False, auto_now_add=False)
     date = models.DateField(verbose_name='choose date')
@@ -19,7 +31,7 @@ class Calendar(models.Model):
 
 class Room(models.Model):
     id = models.CharField(default=uuid.uuid4, editable=False, primary_key=True)
-    title = models.CharField(max_length=256, null=True, blank=True, verbose_name='title of room')
+    title = models.CharField(max_length=256, verbose_name='title of room', default='first room', editable=True)
     calendar_id = models.ManyToManyField(Calendar, related_name='room_calendar_id',
                                          verbose_name='choose day and time')
     status = models.BooleanField(default=False, verbose_name='status of room')
@@ -27,7 +39,7 @@ class Room(models.Model):
     capacity = models.SmallIntegerField(default=0, verbose_name='room capacity')
 
     def __str__(self):
-        return self.status
+        return self.title
 
 
 class Reservation(models.Model):
@@ -39,4 +51,4 @@ class Reservation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.user_id.phone_number}: {self.room_id.title}'
+        return f'{self.room_id.title}'

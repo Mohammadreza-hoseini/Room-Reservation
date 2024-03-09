@@ -24,7 +24,7 @@ def login_attempt(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             request.session['phone_number'] = form.data['phone_number']
-            return redirect('otp')
+            return redirect('accounts:otp')
         return render(request, 'accounts/login.html', {'form': form})
     return render(request, 'accounts/login.html', {'form': LoginForm()})
 
@@ -40,10 +40,9 @@ def check_otp(request):
             otp = form.data['otp']
             get_user = NewUser.objects.filter(phone_number=phone_number).first()
             if get_user is None:
-                return redirect('signup')
+                return redirect('accounts:signup')
             if otp == str(get_user.otp):
-                user = NewUser.objects.get(id=get_user.id)
-                login(request, user)
+                login(request, get_user)
                 return redirect('home')
             return render(request, 'accounts/otp_login.html', {'form': OtpForm(), 'message': 'otp code is wrong'})
         return render(request, 'accounts/otp_login.html', {'form': form})
