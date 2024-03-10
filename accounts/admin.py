@@ -27,7 +27,7 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('last_login', 'date_joined')
         }),
         ('Additional info', {
-            'fields': ('phone_number', 'otp', 'avatar',)
+            'fields': ('phone_number', 'otp', 'otp_expire', 'avatar',)
         })
     )
 
@@ -48,7 +48,7 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('last_login', 'date_joined')
         }),
         ('Additional info', {
-            'fields': ('phone_number', 'otp', 'avatar',)
+            'fields': ('phone_number', 'otp', 'otp_expire', 'avatar',)
         })
     )
 

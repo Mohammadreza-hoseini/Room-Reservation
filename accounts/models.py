@@ -11,6 +11,7 @@ class NewUser(AbstractUser):
     avatar = models.ImageField(upload_to='profile_images', null=True, blank=True, verbose_name='profile image')
     phone_number = models.CharField(verbose_name='phone number')
     otp = models.PositiveBigIntegerField(verbose_name='otp code', null=True, blank=True)
+    otp_expire = models.DateTimeField(blank=True, null=True, verbose_name='otp expire time')
 
     def __str__(self):
         return self.email
