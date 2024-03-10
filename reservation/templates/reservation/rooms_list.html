@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+{% block content %}
+    <h1>List of Rooms</h1>
+    <div class="container mt-5">
+        <div class="row">
+            <ul class="list-group">
+                {% for room in rooms_list %}
+                    <li class="list-group-item ml-5">
+                        <a class="btn btn-warning" href="#">{{ room.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,5 +1,6 @@
 import re
 import random
+from django.utils import timezone
 from django import forms
 from .models import NewUser
 
@@ -75,6 +76,8 @@ class LoginForm(forms.ModelForm):
             self.add_error('phone_number', 'SignUp please')
         elif check_phone_number:
             check_phone_number.otp = random.randint(10000, 99999)
+            check_phone_number.otp_expire = timezone.now() + timezone.timedelta(seconds=30)
+            print(check_phone_number.otp_expire)
             print(check_phone_number.otp)
             check_phone_number.save()
         return phone_number

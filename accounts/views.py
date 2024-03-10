@@ -1,8 +1,6 @@
+from django.utils import timezone
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth import login, logout
-
-# Create your views here.
 from accounts.forms import NewUserForm, LoginForm, OtpForm
 from accounts.models import NewUser
 
@@ -41,7 +39,10 @@ def check_otp(request):
             get_user = NewUser.objects.filter(phone_number=phone_number).first()
             if get_user is None:
                 return redirect('accounts:signup')
-            if otp == str(get_user.otp):
+            elif timezone.now() > get_user.otp_expire:
+                return render(request, 'accounts/otp_login.html',
+                              {'form': OtpForm(), 'message': 'otp code expire login and get otp code again'})
+            elif otp == str(get_user.otp):
                 login(request, get_user)
                 return redirect('home')
             return render(request, 'accounts/otp_login.html', {'form': OtpForm(), 'message': 'otp code is wrong'})
