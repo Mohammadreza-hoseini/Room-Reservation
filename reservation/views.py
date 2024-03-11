@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 
+from accounts.models import Comment
 from .forms import CommentForm
 from .models import Room
 from django.views.generic import ListView, DetailView
@@ -18,20 +19,31 @@ class EmptyRoomListView(LoginRequiredMixin, ListView):
 
 @login_required()
 def room_detail(request, room_id):
+    if request.method == 'GET':
+        room = get_object_or_404(Room, id=room_id)
+        get_comments = Comment.objects.filter(room_id=room.id, status=True)
+        return render(request, 'reservation/room_detail.html',
+                      {'room': room, 'form': CommentForm(), 'comments': get_comments})
+
+
+@login_required()
+def add_comment(request, room_id):
+    print(room_id)
     room = get_object_or_404(Room, id=room_id)
+    get_comments = Comment.objects.filter(room_id=room.id, status=True)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.room = room
+            comment.room_id = room_id
             comment.author = request.user
             comment.body = form.data['body']
             comment.rate = form.data['rate']
             comment.save()
-            return render(request, 'reservation/room_detail.html', {'form': CommentForm(),
-                                                                    'message': 'Your comment has been saved and will be'
-                                                                               ' displayed after the administrator'
-                                                                               ' approval'})
-        return render(request, 'reservation/room_detail.html', {'room': room, 'form': form})
+            return redirect('reservation:room_detail', room_id)
+        else:
+            return render(request, 'reservation/room_detail.html',
+                          {'room': room, 'form': form, 'comments': get_comments})
     else:
-        return render(request, 'reservation/room_detail.html', {'room': room, 'form': CommentForm()})
+        return render(request, 'reservation/room_detail.html',
+                      {'room': room, 'form': CommentForm(), 'comments': get_comments})
