@@ -14,11 +14,13 @@ class NewUserForm(forms.ModelForm):
         first_name = self.cleaned_data['first_name']
         if first_name is None or first_name == '':
             self.add_error('first_name', 'Enter your firstname')
+        return first_name
 
     def clean_last_name(self):
         last_name = self.cleaned_data['last_name']
         if last_name is None or last_name == '':
             self.add_error('last_name', 'Enter your last_name')
+        return last_name
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -32,6 +34,7 @@ class NewUserForm(forms.ModelForm):
         check_email = NewUser.objects.filter(email=email).first()
         if check_email:
             self.add_error('email', 'This email exist')
+        return email
 
     def clean_phone_number(self):
         phone_number = self.cleaned_data['phone_number']
@@ -77,7 +80,6 @@ class LoginForm(forms.ModelForm):
         elif check_phone_number:
             check_phone_number.otp = random.randint(10000, 99999)
             check_phone_number.otp_expire = timezone.now() + timezone.timedelta(seconds=30)
-            print(check_phone_number.otp_expire)
             print(check_phone_number.otp)
             check_phone_number.save()
         return phone_number

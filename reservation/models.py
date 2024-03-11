@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models import NewUser, TeamLeader
 import uuid
+from django.urls import reverse
 
 
 # Create your models here.
@@ -37,6 +38,9 @@ class Room(models.Model):
     status = models.BooleanField(default=False, verbose_name='status of room')
     created_at = models.DateTimeField(auto_now_add=True)
     capacity = models.SmallIntegerField(default=0, verbose_name='room capacity')
+
+    def get_absolute_url(self):
+        return reverse('reservation:room_detail', args=(self.id,))
 
     def __str__(self):
         return self.title
