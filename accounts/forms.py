@@ -1,7 +1,7 @@
 import re
 import random
 from django import forms
-from .models import NewUser,TeamMembers
+from .models import NewUser,TeamMembers,TeamLeader
 
 
 class NewUserForm(forms.ModelForm):
@@ -92,6 +92,8 @@ class OtpForm(forms.ModelForm):
         return otp
 
 class JoinGroupForm(forms.ModelForm):
+    leader = forms.ModelChoiceField(queryset=TeamLeader.objects.all())
+
     class Meta:
-        model = TeamMembers
-        fields = ("leader",)
+        model = TeamLeader
+        fields = ['leader']

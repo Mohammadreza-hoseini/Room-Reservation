@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
-
-from django.views.generic import DetailView , CreateView , View
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.http import HttpResponseRedirect
+from django.views.generic import DetailView , View,CreateView
 # Create your views here.
 from accounts.forms import NewUserForm, LoginForm, OtpForm, JoinGroupForm
 from accounts.models import NewUser , TeamMembers , TeamLeader
@@ -45,7 +47,7 @@ def check_otp(request):
                 return redirect('accounts:signup')
             if otp == str(get_user.otp):
                 login(request, get_user)
-                return redirect('home')
+                return redirect('home:home')
             return render(request, 'accounts/otp_login.html', {'form': OtpForm(), 'message': 'otp code is wrong'})
         return render(request, 'accounts/otp_login.html', {'form': form})
     return render(request, 'accounts/otp_login.html', {'form': OtpForm()})
@@ -56,32 +58,33 @@ def user_logout(request):
     return redirect('home')
 
 
+
 class UserProfile(DetailView):
     model = NewUser
     template_name = "accounts/userprofile.html"
     context_object_name = "user"
 
 
-class JoinGroup(View):
-
+@method_decorator(csrf_exempt, name='dispatch')
+class JoinGroup(CreateView):
     form_class = JoinGroupForm
-    template_page = "accounts/joingroup.html"
+    template_name = "accounts/joingroup.html"
+    redirect_authenticated_user = True
+    success_url = reverse_lazy('user-profile')
 
-    def get(self,request):
-        
-        form = self.form_class
-        return render(request,self.template_page,{
-            "form":form
+
+    def get(self, *args, **kwargs):
+        if TeamMembers.objects.filter(users=self.request.user).exists():
+            return redirect("home:home")
+        return render(self.request,self.template_name,{
+            "form":self.form_class
         })
-    def post(self,request):
-        form = self.form_class(request.POST)
-        print("**********************************************",request.user.username)
-        if form.is_valid():
-            cd = form.cleaned_data
-            
-            TeamMembers.leader = cd["leader"]
-            TeamMembers.users = request.user
-            TeamMembers.save()
-            return redirect("accounts:user-profile")
 
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            TeamMembers.objects.create(leader=form.cleaned_data["leader"],users=request.user)
+            TeamMembers.save()
+    
+    
     
