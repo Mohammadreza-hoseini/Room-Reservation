@@ -1,8 +1,9 @@
 from django.utils import timezone
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
-from accounts.forms import NewUserForm, LoginForm, OtpForm
+from accounts.forms import NewUserForm, LoginForm, OtpForm, AvatarForm
 from accounts.models import NewUser
+from django.contrib.auth.decorators import login_required
 
 
 def signup(request):
@@ -10,7 +11,7 @@ def signup(request):
         form = NewUserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('home:home')
         else:
             return render(request, 'accounts/signup.html', {'form': form})
     else:
@@ -44,7 +45,7 @@ def check_otp(request):
                               {'form': OtpForm(), 'message': 'otp code expire login and get otp code again'})
             elif otp == str(get_user.otp):
                 login(request, get_user)
-                return redirect('home')
+                return redirect('home:home')
             return render(request, 'accounts/otp_login.html', {'form': OtpForm(), 'message': 'otp code is wrong'})
         return render(request, 'accounts/otp_login.html', {'form': form})
     return render(request, 'accounts/otp_login.html', {'form': OtpForm()})
@@ -52,4 +53,18 @@ def check_otp(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('home')
+    return redirect('home:home')
+
+
+@login_required()
+def user_profile(request, pk):
+    get_user = NewUser.objects.get(id=pk)
+    if request.method == 'POST':
+        form = AvatarForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:profile', request.user.id)
+        else:
+            form = AvatarForm(instance=request.user)
+        return render(request, 'accounts/profile.html', {'get_user': get_user, 'form': form})
+    return render(request, 'accounts/profile.html', {'get_user': get_user, 'form': AvatarForm()})

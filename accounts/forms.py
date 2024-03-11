@@ -93,3 +93,9 @@ class OtpForm(forms.ModelForm):
         if otp is None or otp == '':
             self.add_error('otp', 'Enter otp code')
         return otp
+
+
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = NewUser
+        fields = ('avatar',)
