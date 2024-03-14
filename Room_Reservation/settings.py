@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+
 import os
 from pathlib import Path
 import dj_database_url
@@ -58,8 +59,7 @@ ROOT_URLCONF = "Room_Reservation.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates']
-        ,
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -89,8 +89,19 @@ WSGI_APPLICATION = "Room_Reservation.wsgi.application"
 # }
 
 # connect to database with url
-DATABASES = {'default': dj_database_url.config(
-    default='postgresql://root:73wWo0aOKGlbMDYazODtpOpR@cho-oyu.liara.cloud:34261/postgres')}
+DATABASES = {
+    "default": dj_database_url.config(
+        default="postgresql://root:73wWo0aOKGlbMDYazODtpOpR@cho-oyu.liara.cloud:34261/postgres"
+    ),
+    "test": {  # TODO
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",
+        "USER": "root",
+        "PASSWORD": "73wWo0aOKGlbMDYazODtpOpR",
+        "HOST": "cho-oyu.liara.cloud",
+        "PORT": "34261",
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -128,7 +139,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
@@ -138,4 +149,4 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = 'accounts.NewUser'
+AUTH_USER_MODEL = "accounts.NewUser"
