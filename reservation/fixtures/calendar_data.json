@@ -1,0 +1,56 @@
+// QUESTION -> 24 hours or 12 hours
+[
+    {
+        "model": "reservation.Calendar",
+        "pk": 7001,
+        "fields": {
+            "day": 0,
+            "start_time": "10:30:00",
+            "end_time": "11:30:00",
+            "date": "2024-03-20",
+            "is_active": false
+        }
+    },
+    {
+        "model": "reservation.Calendar",
+        "pk": 7002,
+        "fields": {
+            "day": 0,
+            "start_time": "11:30:00",
+            "end_time": "12:30:00",
+            "date": "2024-03-20"
+        }
+    },
+    {
+        "model": "reservation.Calendar",
+        "pk": 7003,
+        "fields": {
+            "day": 1,
+            "start_time": "09:15:00",
+            "end_time": "09:45:00",
+            "date": "2024-03-22",
+            "is_active": false
+        }
+    },
+    {
+        "model": "reservation.Calendar",
+        "pk": 7004,
+        "fields": {
+            "day": 1,
+            "start_time": "08:30:00",
+            "end_time": "09:15:00",
+            "date": "2024-03-22"
+        }
+    },
+    {
+        "model": "reservation.Calendar",
+        "pk": 7005,
+        "fields": {
+            "day": 2,
+            "start_time": "07:00:00",
+            "end_time": "06:00:00",
+            "date": "2024-03-14",
+            "is_active": false
+        }
+    }
+]
