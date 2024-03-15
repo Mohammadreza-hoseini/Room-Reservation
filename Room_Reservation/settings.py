@@ -93,14 +93,14 @@ DATABASES = {
     "default": dj_database_url.config(
         default="postgresql://root:73wWo0aOKGlbMDYazODtpOpR@cho-oyu.liara.cloud:34261/postgres"
     ),
-    "test": {  # TODO
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "root",
-        "PASSWORD": "73wWo0aOKGlbMDYazODtpOpR",
-        "HOST": "cho-oyu.liara.cloud",
-        "PORT": "34261",
-    },
+    # "test": {  # TODO
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     "NAME": "postgres",
+    #     "USER": "root",
+    #     "PASSWORD": "73wWo0aOKGlbMDYazODtpOpR",
+    #     "HOST": "cho-oyu.liara.cloud",
+    #     "PORT": "34261",
+    # },
 }
 
 # Password validation
