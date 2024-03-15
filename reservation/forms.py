@@ -1,6 +1,7 @@
 from django import forms
 
 from accounts.models import Comment
+from .models import Calendar
 
 
 class CommentForm(forms.ModelForm):
@@ -19,3 +20,12 @@ class CommentForm(forms.ModelForm):
         if rate is None or rate == '':
             self.add_error('rate', 'Select rate')
         return rate
+
+
+class CalendarSelectForm(forms.Form):
+    calendar_choices = forms.ModelChoiceField(queryset=None)
+
+    def __init__(self, room_id, *args, **kwargs):
+        super(CalendarSelectForm, self).__init__(*args, **kwargs)
+        self.fields['calendar_choices'].queryset = Calendar.objects.filter(room_calendar_id__id=room_id,
+                                                                           is_active=False)
