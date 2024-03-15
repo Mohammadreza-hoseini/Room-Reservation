@@ -1,8 +1,8 @@
 from django.utils import timezone
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
-from accounts.forms import NewUserForm, LoginForm, OtpForm, AvatarForm
-from accounts.models import NewUser
+from accounts.forms import NewUserForm, LoginForm, OtpForm, AvatarForm, TeamMembersForm
+from accounts.models import NewUser, TeamLeader
 from django.contrib.auth.decorators import login_required
 
 
@@ -68,3 +68,12 @@ def user_profile(request, pk):
             form = AvatarForm(instance=request.user)
         return render(request, 'accounts/profile.html', {'get_user': get_user, 'form': form})
     return render(request, 'accounts/profile.html', {'get_user': get_user, 'form': AvatarForm()})
+
+
+def add_to_group(request, pk):
+    if request.method == 'POST':
+        form = TeamMembersForm(request.POST, request=request)
+        if form.is_valid():
+            print('form is valid')
+        return render(request, 'accounts/join-group.html', {'form': form})
+    return render(request, 'accounts/join-group.html', {'form': TeamMembersForm()})
