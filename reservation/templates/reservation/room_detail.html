@@ -21,4 +21,9 @@
         </ul>
         <hr>
     {% endfor %}
+    <form method="post">
+        {% csrf_token %}
+        {{ calendar_form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
 {% endblock content %}
