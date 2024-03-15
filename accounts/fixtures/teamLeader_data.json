@@ -1,0 +1,23 @@
+[
+    {
+        "model": "accounts.TeamLeader",
+        "pk": 6001,
+        "fields": {
+            "leader": 5001
+        }
+    },
+    {
+        "model": "accounts.TeamLeader",
+        "pk": 6002,
+        "fields": {
+            "leader": 5002
+        }
+    },
+    {
+        "model": "accounts.TeamLeader",
+        "pk": 6003,
+        "fields": {
+            "leader": 5003
+        }
+    }
+]
