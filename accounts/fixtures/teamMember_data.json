@@ -1,0 +1,26 @@
+[
+    {
+        "model": "accounts.TeamMembers",
+        "pk": 3001,
+        "fields": {
+            "leader": 6001,
+            "users": [5002, 5003]
+        }
+    },
+    {
+        "model": "accounts.TeamMembers",
+        "pk": 3002,
+        "fields": {
+            "leader": 6002,
+            "users": [5001, 5005, 5006]
+        }
+    },
+    {
+        "model": "accounts.TeamMembers",
+        "pk": 3003,
+        "fields": {
+            "leader": 6003,
+            "users": [5001]
+        }
+    }
+]
