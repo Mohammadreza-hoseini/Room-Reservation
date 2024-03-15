@@ -1,0 +1,44 @@
+[
+    {
+        "model": "accounts.Comment",
+        "pk": 4001,
+        "fields": {
+            "body": "body 1",
+            "author": 5001,
+            "room": 1001,
+            "status": true,
+            "rate": 2
+        }
+    },
+    {
+        "model": "accounts.Comment",
+        "pk": 4002,
+        "fields": {
+            "body": "body 2",
+            "author": 5002,
+            "room": 1002,
+            "rate": 1
+        }
+    },
+    {
+        "model": "accounts.Comment",
+        "pk": 4003,
+        "fields": {
+            "body": "body 3",
+            "author": 5004,
+            "room": 1001,
+            "status": true,
+            "rate": 4
+        }
+    },
+    {
+        "model": "accounts.Comment",
+        "pk": 4004,
+        "fields": {
+            "body": "body 4",
+            "author": 5007,
+            "room": 1004,
+            "rate": 5
+        }
+    }
+]
