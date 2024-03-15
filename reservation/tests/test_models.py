@@ -6,6 +6,8 @@ from accounts.models import TeamLeader
 
 class ReservationModelTest(TestCase):
 
+    fixtures = ["reservation_data.json"]
+
     @classmethod
     def setUpTestData(cls):
         # all_rooms = Room.objects.all().count()
