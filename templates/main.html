@@ -19,24 +19,27 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item active ml-5">
+            <li class="nav-item active ml-5 mb-2">
                 <a class="btn btn-primary" href="{% url 'home:home' %}">Home <span class="sr-only">(current)</span></a>
             </li>
             {% if user.is_authenticated %}
-                <li class="nav-item ml-5">
+                <li class="nav-item ml-5 mb-2">
                     <a class="btn btn-warning" href="{% url 'accounts:logout' %}">LogOut</a>
                 </li>
-                <li class="nav-item ml-5">
+                <li class="nav-item ml-5 mb-2">
                     <a class="btn btn-warning" href="{% url 'reservation:rooms' %}">Rooms</a>
                 </li>
-                <li class="nav-item ml-5">
+                <li class="nav-item ml-5 mb-2">
+                    <a class="btn btn-warning" href="{% url 'accounts:join_group' request.user.id %}">Groups</a>
+                </li>
+                <li class="nav-item ml-5 mb-2">
                     <a class="btn btn-warning" href="{% url 'accounts:profile' request.user.id %}">Profile</a>
                 </li>
             {% else %}
-                <li class="nav-item ml-5">
+                <li class="nav-item ml-5 mb-2">
                     <a class="btn btn-warning" href="{% url 'accounts:signup' %}">SignUp</a>
                 </li>
-                <li class="nav-item ml-5">
+                <li class="nav-item ml-5 mb-2">
                     <a class="btn btn-warning" href="{% url 'accounts:login' %}">LogIn</a>
                 </li>
             {% endif %}

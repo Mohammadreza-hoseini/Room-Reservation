@@ -1,8 +1,10 @@
 import re
 import random
+
+from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django import forms
-from .models import NewUser
+from .models import NewUser, TeamLeader, TeamMembers
 
 
 class NewUserForm(forms.ModelForm):
@@ -101,3 +103,27 @@ class AvatarForm(forms.ModelForm):
     class Meta:
         model = NewUser
         fields = ('avatar',)
+
+
+class TeamMembersForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(TeamMembersForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = TeamMembers
+        fields = ('leader',)
+
+    def clean(self):
+        query = TeamMembers.objects.filter(users__id=self.request.user.id).first()
+        if query:
+            raise ValidationError(
+                "can not join on two group"
+            )
+        else:
+            ...
+            # TeamMembers.objects.create(lea)
+
+    # def save(self, commit=True):
+    #     print('def dave')
