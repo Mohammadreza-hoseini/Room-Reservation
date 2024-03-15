@@ -1,0 +1,42 @@
+[
+    {
+        "model": "reservation.Room",
+        "pk": 1001,
+        "fields": {
+            "title": "test_room_1",
+            "calendar_id": 7001,
+            "status": true,
+            "capacity": 10
+        }
+    },
+    {
+        "model": "reservation.Room",
+        "pk": 1002,
+        "fields": {
+            "title": "test_room_2",
+            "calendar_id": 7002,
+            "status": false,
+            "capacity": 30
+        }
+    },
+    {
+        "model": "reservation.Room",
+        "pk": 1003,
+        "fields": {
+            "title": "test_room_3",
+            "calendar_id": 7003,
+            "status": true,
+            "capacity": 1
+        }
+    },
+    {
+        "model": "reservation.Room",
+        "pk": 1004,
+        "fields": {
+            "title": "test_room_4",
+            "calendar_id": 7004,
+            "status": false,
+            "capacity": 1
+        }
+    }
+]
