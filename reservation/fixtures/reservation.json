@@ -1,0 +1,26 @@
+[
+    {
+        "model": "reservation.Reservation",
+        "pk": 2001,
+        "fields": {
+            "room_id": 1001,
+            "leader": "" //TODO
+        }
+    },
+    {
+        "model": "reservation.Reservation",
+        "pk": 2002,
+        "fields": {
+            "room_id": 1002,
+            "leader": "" //TODO
+        }
+    },
+    {
+        "model": "reservation.Reservation",
+        "pk": 2001,
+        "fields": {
+            "room_id": 1003,
+            "leader": "" //TODO
+        }
+    }
+]
