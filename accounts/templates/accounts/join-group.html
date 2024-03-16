@@ -2,6 +2,11 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <h1 class="mb-5">Join Group</h1>
+    {% if message %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endif %}
     <form method="post" novalidate>
         {% csrf_token %}
         {{ form|crispy }}
