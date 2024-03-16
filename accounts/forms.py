@@ -116,14 +116,11 @@ class TeamMembersForm(forms.ModelForm):
         fields = ('leader',)
 
     def clean(self):
-        query = TeamMembers.objects.filter(users__id=self.request.user.id).first()
+        query = TeamMembers.objects.filter(users__id=self.request.user.id,
+                                           leader_id=self.cleaned_data['leader'].id).first()
         if query:
-            raise ValidationError(
-                "can not join on two group"
-            )
+            self.add_error('leader', 'You are a member of one group and you cannot join another group.')
         else:
-            ...
-            # TeamMembers.objects.create(lea)
-
-    # def save(self, commit=True):
-    #     print('def dave')
+            add_to_team = TeamMembers.objects.create(leader_id=self.cleaned_data['leader'].id)
+            add_to_team.users.add(NewUser.objects.get(id=self.request.user.id))
+            add_to_team.save()
