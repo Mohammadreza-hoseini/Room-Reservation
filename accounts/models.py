@@ -8,7 +8,8 @@ import uuid
 
 class NewUser(AbstractUser):
     id = models.CharField(default=uuid.uuid4, editable=False, primary_key=True)
-    avatar = models.ImageField(upload_to='profile_images', null=True, blank=True, verbose_name='change avatar')
+    avatar = models.ImageField(upload_to='profile_images', default='profile_images/6596121.png', null=True, blank=True,
+                               verbose_name='change avatar')
     phone_number = models.CharField(verbose_name='phone number')
     otp = models.PositiveBigIntegerField(verbose_name='otp code', null=True, blank=True)
     otp_expire = models.DateTimeField(blank=True, null=True, verbose_name='otp expire time')
