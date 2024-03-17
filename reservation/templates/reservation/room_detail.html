@@ -7,6 +7,12 @@
             {{ message }}
         </div>
     {% endif %}
+    <form method="post" novalidate action="{% url 'reservation:reserve_room' room.id %}">
+        {% csrf_token %}
+        {{ calendar_form|crispy }}
+        <button type="submit" class="btn btn-success">Add</button>
+    </form>
+    <br>
     <form method="post" novalidate action="{% url 'reservation:add_comment' room.id %}">
         {% csrf_token %}
         {{ form|crispy }}
@@ -21,9 +27,4 @@
         </ul>
         <hr>
     {% endfor %}
-    <form method="post">
-        {% csrf_token %}
-        {{ calendar_form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
 {% endblock content %}
