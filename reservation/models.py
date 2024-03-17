@@ -27,7 +27,7 @@ class Calendar(models.Model):
     is_active = models.BooleanField(default=True, verbose_name='this time active or no')
 
     def __str__(self):
-        return f'{self.day}: {self.start_time} - {self.end_time}'
+        return f'day: {self.day} - start time: {self.start_time} - end time: {self.end_time} - date: {self.date}'
 
 
 class Room(models.Model):
