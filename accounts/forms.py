@@ -1,8 +1,10 @@
 import re
 import random
+
+from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django import forms
-from .models import NewUser
+from .models import NewUser, TeamLeader, TeamMembers
 
 
 class NewUserForm(forms.ModelForm):
@@ -101,3 +103,24 @@ class AvatarForm(forms.ModelForm):
     class Meta:
         model = NewUser
         fields = ('avatar',)
+
+
+class TeamMembersForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(TeamMembersForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = TeamMembers
+        fields = ('leader',)
+
+    def clean(self):
+        query = TeamMembers.objects.filter(users__id=self.request.user.id,
+                                           leader_id=self.cleaned_data['leader'].id).first()
+        if query:
+            self.add_error('leader', 'You are a member of one group and you cannot join another group.')
+        else:
+            add_to_team = TeamMembers.objects.create(leader_id=self.cleaned_data['leader'].id)
+            add_to_team.users.add(NewUser.objects.get(id=self.request.user.id))
+            add_to_team.save()

@@ -1,8 +1,8 @@
 from django.utils import timezone
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
-from accounts.forms import NewUserForm, LoginForm, OtpForm, AvatarForm
-from accounts.models import NewUser
+from accounts.forms import NewUserForm, LoginForm, OtpForm, AvatarForm, TeamMembersForm
+from accounts.models import NewUser, TeamLeader
 from django.contrib.auth.decorators import login_required
 
 
@@ -32,10 +32,7 @@ def check_otp(request):
     if request.method == 'POST':
         form = OtpForm(request.POST)
         if form.is_valid():
-            try:
-                phone_number = request.session['phone_number']
-            except:
-                phone_number = 00000000000
+            phone_number = request.session['phone_number']
             otp = form.data['otp']
             get_user = NewUser.objects.filter(phone_number=phone_number).first()
             if get_user is None:
@@ -68,3 +65,14 @@ def user_profile(request, pk):
             form = AvatarForm(instance=request.user)
         return render(request, 'accounts/profile.html', {'get_user': get_user, 'form': form})
     return render(request, 'accounts/profile.html', {'get_user': get_user, 'form': AvatarForm()})
+
+
+def add_to_group(request, pk):
+    if request.method == 'POST':
+        form = TeamMembersForm(request.POST, request=request)
+        if form.is_valid():
+            # form.save()
+            pass
+        return render(request, 'accounts/join-group.html',
+                      {'form': form, 'message': 'You have been added to the group'})
+    return render(request, 'accounts/join-group.html', {'form': TeamMembersForm()})

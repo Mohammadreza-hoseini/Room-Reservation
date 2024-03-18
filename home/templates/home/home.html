@@ -1,4 +1,9 @@
 {% extends 'main.html' %}
 {% block content %}
+    {% if message %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endif %}
     <h1>Welcome to Room Reservation</h1>
 {% endblock content %}
