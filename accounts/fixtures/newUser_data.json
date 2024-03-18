@@ -1,102 +1,112 @@
 [
     {
-        "models": "accounts.NewUser",
-        "pk": "5001",
+        "model": "accounts.NewUser",
+        "pk": 5001,
         "fields": {
+            "username": "test_user1",
             "avatar": "profile_images/bear.jpeg",
             "phone_number": "09111111111",
             "otp": 50000,
-            "otp_expire": "2024-03-20T10:00:00"
+            "otp_expire": "2024-03-20T10:00:00Z"
         }
     },
     {
-        "models": "accounts.NewUser",
-        "pk": "5002",
+        "model": "accounts.NewUser",
+        "pk": 5002,
         "fields": {
+            "username": "test_user2",
             "avatar": "profile_images/bear.jpeg",
             "phone_number": "09222222222",
             "otp": 50001,
-            "otp_expire": "2024-03-14T11:20:33"
+            "otp_expire": "2024-03-14T11:20:33Z"
         }
     },
     {
-        "models": "accounts.NewUser",
-        "pk": "5003",
+        "model": "accounts.NewUser",
+        "pk": 5003,
         "fields": {
+            "username": "test_user3",
             "avatar": "profile_images/bear.jpeg",
             "phone_number": "09333333333",
             "otp": 50002,
-            "otp_expire": "2024-03-16T10:12:41"
+            "otp_expire": "2024-03-16T10:12:41Z"
         }
     },
     {
-        "models": "accounts.NewUser",
-        "pk": "5004",
+        "model": "accounts.NewUser",
+        "pk": 5004,
         "fields": {
+            "username": "test_user4",
             "avatar": "profile_images/bear.jpeg",
             "phone_number": "09444444444",
             "otp": 50003,
-            "otp_expire": "2023-03-16T11:22:41"
+            "otp_expire": "2023-03-16T11:22:41Z"
         }
     },
     {
-        "models": "accounts.NewUser",
-        "pk": "5005",
+        "model": "accounts.NewUser",
+        "pk": 5005,
         "fields": {
+            "username": "test_user5",
             "avatar": "profile_images/bear.jpeg",
             "phone_number": "09555555555",
             "otp": 50004,
-            "otp_expire": "2024-02-17T08:07:36"
+            "otp_expire": "2024-02-17T08:07:36Z"
         }
     },
     {
-        "models": "accounts.NewUser",
-        "pk": "5006",
+        "model": "accounts.NewUser",
+        "pk": 5006,
         "fields": {
+            "username": "test_user6",
             "avatar": "profile_images/bear.jpeg",
             "phone_number": "09666666666",
             "otp": 50005,
-            "otp_expire": "2024-03-16T10:12:41"
+            "otp_expire": "2024-03-16T10:12:41Z"
         }
     },
     {
-        "models": "accounts.NewUser",
-        "pk": "5007",
+        "model": "accounts.NewUser",
+        "pk": 5007,
         "fields": {
+            "username": "test_user7",
             "avatar": "profile_images/bear.jpeg",
             "phone_number": "09777777777",
             "otp": 50006,
-            "otp_expire": "2022-03-16T10:12:41"
+            "otp_expire": "2022-03-16T10:12:41Z"
         }
     },
     {
-        "models": "accounts.NewUser",
-        "pk": "5008",
+        "model": "accounts.NewUser",
+        "pk": 5008,
         "fields": {
+            "username": "test_user8",
             "avatar": "profile_images/bear.jpeg",
             "phone_number": "09888888888",
             "otp": 50007,
-            "otp_expire": "2024-03-16T10:12:41"
+            "otp_expire": "2024-03-16T10:12:41Z"
         }
     },
     {
-        "models": "accounts.NewUser",
-        "pk": "5009",
+        "model": "accounts.NewUser",
+        "pk": 5009,
         "fields": {
+            "username": "test_user9",
             "avatar": "profile_images/bear.jpeg",
             "phone_number": "09888888888",
             "otp": 50008,
-            "otp_expire": "2024-03-16T10:12:41"
+            "otp_expire": "2024-03-16T10:12:41Z"
         }
     },
     {
-        "models": "accounts.NewUser",
-        "pk": "5010",
+        "model": "accounts.NewUser",
+        "pk": 5010,
         "fields": {
+            "username": "test_user10",
             "avatar": "profile_images/bear.jpeg",
             "phone_number": "09121212121",
             "otp": 50009,
-            "otp_expire": "2024-03-16T10:12:41"
+            "otp_expire": "2024-03-16T10:12:41Z"
         }
     }
 ]

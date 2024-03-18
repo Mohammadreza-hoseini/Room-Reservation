@@ -4,7 +4,8 @@
         "pk": 2001,
         "fields": {
             "room_id": 1001,
-            "leader": 5001
+            "leader": 6001,
+            "created_at": "2024-03-17T15:40:00Z"
         }
     },
     {
@@ -12,7 +13,8 @@
         "pk": 2002,
         "fields": {
             "room_id": 1002,
-            "leader": 5002
+            "leader": 6002,
+            "created_at": "2024-03-18T15:40:00Z"
         }
     },
     {
@@ -20,7 +22,8 @@
         "pk": 2001,
         "fields": {
             "room_id": 1003,
-            "leader": 5003
+            "leader": 6003,
+            "created_at": "2024-03-21T15:40:00Z"
         }
     }
 ]
